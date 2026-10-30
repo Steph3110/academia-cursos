@@ -1,7 +1,7 @@
 
 -- =============================================================
 -- Script 01: Creacion de tablas
--- Revisado por: Emilio Solis - Fecha: 2024-06-10
+-- Revisado por: Emilio Solis - Fecha: 2026-10-30
 -- =============================================================
 
 CREATE DATABASE IF NOT EXISTS academia_cursos;
