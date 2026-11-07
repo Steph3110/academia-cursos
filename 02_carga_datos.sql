@@ -1,63 +1,184 @@
 USE academia_cursos;
 
-INSERT INTO estudiantes (id_estudiante, nombre, correo, ciudad) VALUES
-(1, 'Camila Rojas', 'camila.rojas@example.com', 'Santiago'),
-(2, 'Matias Fuentes', 'matias.fuentes@example.com', 'Valparaiso'),
-(3, 'Valentina Soto', 'valentina.soto@example.com', 'Concepcion'),
-(4, 'Diego Morales', 'diego.morales@example.com', 'La Serena'),
-(5, 'Fernanda Castro', 'fernanda.castro@example.com', 'Temuco'),
-(6, 'Joaquin Herrera', 'joaquin.herrera@example.com', 'Santiago'),
-(7, 'Antonia Vega', 'antonia.vega@example.com', 'Rancagua'),
-(8, 'Benjamin Silva', 'benjamin.silva@example.com', 'Puerto Montt'),
-(9, 'Isidora Torres', 'isidora.torres@example.com', 'Valdivia'),
-(10, 'Nicolas Ramirez', 'nicolas.ramirez@example.com', 'Arica');
+-- Carga inicial: 100 registros por tabla.
+-- Requiere MySQL 8.0 o superior.
 
-INSERT INTO profesores (id_profesor, nombre, especialidad) VALUES
-(1, 'Paula Mendez', 'Programacion y desarrollo web'),
-(2, 'Cristobal Reyes', 'Analisis de datos'),
-(3, 'Daniela Paredes', 'Diseno grafico'),
-(4, 'Sebastian Vidal', 'Marketing digital'),
-(5, 'Carolina Navarro', 'Finanzas'),
-(6, 'Felipe Araya', 'Ingles'),
-(7, 'Macarena Leon', 'Fotografia'),
-(8, 'Rodrigo Campos', 'Emprendimiento'),
-(9, 'Francisca Riquelme', 'Ofimatica'),
-(10, 'Andres Molina', 'Liderazgo');
+DROP TEMPORARY TABLE IF EXISTS numeros;
+CREATE TEMPORARY TABLE numeros (
+    n INT UNSIGNED NOT NULL PRIMARY KEY
+);
 
-INSERT INTO categorias (id_categoria, nombre) VALUES
-(1, 'Programacion'),
-(2, 'Datos'),
-(3, 'Diseno'),
-(4, 'Marketing'),
-(5, 'Finanzas'),
-(6, 'Idiomas'),
-(7, 'Fotografia'),
-(8, 'Negocios'),
-(9, 'Ofimatica'),
-(10, 'Desarrollo personal');
+INSERT INTO numeros (n)
+WITH RECURSIVE secuencia AS (
+    SELECT 1 AS n
+    UNION ALL
+    SELECT n + 1
+    FROM secuencia
+    WHERE n < 100
+)
+SELECT n
+FROM secuencia;
 
-INSERT INTO cursos (id_curso, id_profesor, id_categoria, nombre, precio_base) VALUES
-(1, 1, 1, 'Fundamentos de Python', 79900.00),
-(2, 1, 1, 'Desarrollo web con HTML y CSS', 129900.00),
-(3, 2, 2, 'Introduccion al analisis de datos', 89900.00),
-(4, 3, 3, 'Diseno grafico para principiantes', 149900.00),
-(5, 4, 4, 'Redes sociales para emprendimientos', 99900.00),
-(6, 5, 5, 'Finanzas personales', 189900.00),
-(7, 6, 6, 'Ingles para el trabajo', 74900.00),
-(8, 7, 7, 'Fotografia digital', 109900.00),
-(9, 8, 8, 'Plan de negocios', 134900.00),
-(10, 9, 9, 'Excel intermedio', 59900.00);
+INSERT INTO estudiantes (
+    id_estudiante, nombre, apellido, correo, telefono, ciudad,
+    fecha_registro, activo
+)
+SELECT
+    n,
+    CONCAT('Estudiante ', n),
+    CONCAT('Apellido ', n),
+    CONCAT('estudiante', n, '@example.com'),
+    CONCAT('9', LPAD(n, 8, '0')),
+    ELT(((n - 1) % 10) + 1, 'Santiago', 'Valparaiso', 'Concepcion',
+        'La Serena', 'Temuco', 'Rancagua', 'Talca', 'Valdivia',
+        'Arica', 'Puerto Montt'),
+    DATE_ADD('2026-01-01', INTERVAL (n - 1) DAY),
+    TRUE
+FROM numeros;
 
-INSERT INTO Inscripciones
-    (id_inscripcion, id_estudiante, id_curso, fecha, importe_final, estado)
-VALUES
-(1, 1, 1, '2026-03-02', 71900.00, 'pagada'),
-(2, 2, 1, '2026-03-04', 79900.00, 'pagada'),
-(3, 3, 1, '2026-03-07', 79900.00, 'pendiente'),
-(4, 4, 2, '2026-03-10', 119900.00, 'pagada'),
-(5, 5, 2, '2026-03-12', 129900.00, 'cancelada'),
-(6, 6, 3, '2026-03-15', 79900.00, 'pagada'),
-(7, 7, 3, '2026-03-17', 84900.00, 'pagada'),
-(8, 8, 4, '2026-03-20', 139900.00, 'pagada'),
-(9, 9, 4, '2026-03-22', 149900.00, 'pendiente'),
-(10, 10, 5, '2026-03-25', 89900.00, 'pagada');
+INSERT INTO especialidades (
+    id_especialidad, nombre, descripcion, activo
+)
+SELECT
+    n,
+    CONCAT('Especialidad ', n),
+    CONCAT('Descripcion de la especialidad ', n),
+    TRUE
+FROM numeros;
+
+INSERT INTO profesores (
+    id_profesor, nombre, apellido, correo, telefono, activo
+)
+SELECT
+    n,
+    CONCAT('Profesor ', n),
+    CONCAT('Apellido ', n),
+    CONCAT('profesor', n, '@example.com'),
+    CONCAT('9', LPAD(n + 100, 8, '0')),
+    TRUE
+FROM numeros;
+
+INSERT INTO categorias (
+    id_categoria, nombre, descripcion, activo
+)
+SELECT
+    n,
+    CONCAT('Categoria ', n),
+    CONCAT('Descripcion de la categoria ', n),
+    TRUE
+FROM numeros;
+
+INSERT INTO medios_pago (
+    id_medio_pago, nombre, descripcion, activo
+)
+SELECT
+    n,
+    CONCAT('Medio de pago ', n),
+    CONCAT('Descripcion del medio de pago ', n),
+    TRUE
+FROM numeros;
+
+INSERT INTO descuentos (
+    id_descuento, nombre, descripcion, tipo_descuento, valor,
+    fecha_inicio, fecha_termino, activo
+)
+SELECT
+    n,
+    CONCAT('Descuento ', n),
+    CONCAT('Beneficio promocional numero ', n),
+    CASE WHEN MOD(n, 2) = 0 THEN 'porcentaje' ELSE 'monto_fijo' END,
+    CASE WHEN MOD(n, 2) = 0 THEN MOD(n, 25) + 5 ELSE 5000 + (n * 100) END,
+    '2026-01-01',
+    '2026-12-31',
+    TRUE
+FROM numeros;
+
+INSERT INTO profesores_especialidades (
+    id_profesor, id_especialidad, fecha_asignacion
+)
+SELECT
+    n,
+    n,
+    DATE_ADD('2025-01-01', INTERVAL (n - 1) DAY)
+FROM numeros;
+
+INSERT INTO cursos (
+    id_curso, nombre, descripcion, precio_base, fecha_inicio,
+    fecha_termino, duracion_horas, cupo_maximo, modalidad, nivel,
+    estado, id_profesor, id_categoria, id_especialidad
+)
+SELECT
+    n,
+    CONCAT('Curso ', n),
+    CONCAT('Descripcion del curso ', n),
+    50000 + (n * 1000),
+    DATE_ADD('2026-03-01', INTERVAL (n - 1) DAY),
+    DATE_ADD('2026-04-30', INTERVAL (n - 1) DAY),
+    20 + MOD(n, 41),
+    10 + MOD(n, 41),
+    ELT(((n - 1) % 3) + 1, 'presencial', 'online', 'hibrida'),
+    ELT(((n - 1) % 3) + 1, 'basico', 'intermedio', 'avanzado'),
+    ELT(((n - 1) % 4) + 1, 'programado', 'en_curso', 'finalizado',
+        'cancelado'),
+    n,
+    MOD(n - 1, 10) + 1,
+    n
+FROM numeros;
+
+INSERT INTO inscripciones (
+    id_inscripcion, fecha, importe_final, estado, estado_academico,
+    fecha_cancelacion, observaciones, id_estudiante, id_curso,
+    id_descuento
+)
+SELECT
+    n,
+    DATE_ADD('2026-02-01', INTERVAL (n - 1) DAY),
+    50000 + (n * 1000),
+    'activa',
+    'no_iniciado',
+    NULL,
+    CONCAT('Inscripcion de prueba ', n),
+    n,
+    n,
+    n
+FROM numeros;
+
+INSERT INTO planes_pago (
+    id_plan_pago, modalidad_pago, numero_cuotas, monto_total,
+    fecha_acuerdo, id_inscripcion
+)
+SELECT
+    n,
+    'contado',
+    1,
+    50000 + (n * 1000),
+    DATE_ADD('2026-02-01', INTERVAL (n - 1) DAY),
+    n
+FROM numeros;
+
+INSERT INTO cuotas (
+    id_cuota, numero_cuota, monto_programado, fecha_vencimiento,
+    id_plan_pago
+)
+SELECT
+    n,
+    1,
+    50000 + (n * 1000),
+    DATE_ADD('2026-03-01', INTERVAL (n - 1) DAY),
+    n
+FROM numeros;
+
+INSERT INTO pagos (
+    id_pago, fecha_pago, monto_pagado, estado_pago, id_cuota,
+    id_medio_pago
+)
+SELECT
+    n,
+    DATE_ADD('2026-02-15', INTERVAL (n - 1) DAY),
+    50000 + (n * 1000),
+    ELT(((n - 1) % 3) + 1, 'pendiente', 'confirmado', 'rechazado'),
+    n,
+    MOD(n - 1, 100) + 1
+FROM numeros;
+
+DROP TEMPORARY TABLE numeros;
