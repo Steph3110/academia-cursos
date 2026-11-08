@@ -1,184 +1,533 @@
 USE academia_cursos;
 
--- Carga inicial: 100 registros por tabla.
--- Requiere MySQL 8.0 o superior.
+START TRANSACTION;
 
-DROP TEMPORARY TABLE IF EXISTS numeros;
-CREATE TEMPORARY TABLE numeros (
-    n INT UNSIGNED NOT NULL PRIMARY KEY
-);
+INSERT INTO estudiantes (id_estudiante, nombre, apellido, correo, telefono, ciudad, fecha_registro, activo) VALUES
+(1, 'Camila', 'Díaz', 'alumno001@ejemplo.cl', '+56980000001', 'Santiago', '2025-01-10', 1),
+(2, 'Diego', 'Contreras', 'alumno002@ejemplo.cl', '+56980000002', 'Puente Alto', '2025-01-19', 1),
+(3, 'Valentina', 'Sepúlveda', 'alumno003@ejemplo.cl', '+56980000003', 'Maipú', '2025-01-28', 1),
+(4, 'Matías', 'López', 'alumno004@ejemplo.cl', '+56980000004', 'La Florida', '2025-02-06', 1),
+(5, 'Fernanda', 'Torres', 'alumno005@ejemplo.cl', '+56980000005', 'Valparaíso', '2025-02-15', 1),
+(6, 'Sebastián', 'Espinoza', 'alumno006@ejemplo.cl', '+56980000006', 'Viña del Mar', '2025-02-24', 1),
+(7, 'Catalina', 'Muñoz', 'alumno007@ejemplo.cl', '+56980000007', 'Concepción', '2025-03-05', 1),
+(8, 'Joaquín', 'Pérez', 'alumno008@ejemplo.cl', '+56980000008', 'Temuco', '2025-03-14', 1),
+(9, 'Antonia', 'Silva', 'alumno009@ejemplo.cl', '+56980000009', 'La Serena', '2025-03-23', 0),
+(10, 'Benjamín', 'Morales', 'alumno010@ejemplo.cl', '+56980000010', 'Antofagasta', '2025-04-01', 1),
+(11, 'Francisca', 'Fuentes', 'alumno011@ejemplo.cl', '+56980000011', 'Rancagua', '2025-04-10', 1),
+(12, 'Vicente', 'Araya', 'alumno012@ejemplo.cl', '+56980000012', 'Talca', '2025-04-19', 1),
+(13, 'Daniela', 'Valenzuela', 'alumno013@ejemplo.cl', '+56980000013', 'Puerto Montt', '2025-04-28', 1),
+(14, 'Tomás', 'Rojas', 'alumno014@ejemplo.cl', '+56980000014', 'Iquique', '2025-05-07', 1),
+(15, 'Isidora', 'Soto', 'alumno015@ejemplo.cl', '+56980000015', 'Arica', '2025-05-16', 1),
+(16, 'Felipe', 'Martínez', 'alumno016@ejemplo.cl', '+56980000016', 'Chillán', '2025-05-25', 1),
+(17, 'Paula', 'Rodríguez', 'alumno017@ejemplo.cl', '+56980000017', 'Osorno', '2025-06-03', 1),
+(18, 'Nicolás', 'Hernández', 'alumno018@ejemplo.cl', '+56980000018', 'Copiapó', '2025-06-12', 0),
+(19, 'Constanza', 'Flores', 'alumno019@ejemplo.cl', '+56980000019', 'Quilpué', '2025-06-21', 1),
+(20, 'Gabriel', 'González', 'alumno020@ejemplo.cl', '+56980000020', 'Los Ángeles', '2025-06-30', 1),
+(21, 'Josefa', 'Díaz', 'alumno021@ejemplo.cl', '+56980000021', 'Santiago', '2025-07-09', 1),
+(22, 'Ignacio', 'Contreras', 'alumno022@ejemplo.cl', '+56980000022', 'Puente Alto', '2025-07-18', 1),
+(23, 'Carolina', 'Sepúlveda', 'alumno023@ejemplo.cl', '+56980000023', 'Maipú', '2025-07-27', 1),
+(24, 'Cristóbal', 'López', 'alumno024@ejemplo.cl', '+56980000024', 'La Florida', '2025-08-05', 1),
+(25, 'Macarena', 'Torres', 'alumno025@ejemplo.cl', '+56980000025', 'Valparaíso', '2025-08-14', 1),
+(26, 'Camila', 'Espinoza', 'alumno026@ejemplo.cl', '+56980000026', 'Viña del Mar', '2025-08-23', 1),
+(27, 'Diego', 'Muñoz', 'alumno027@ejemplo.cl', '+56980000027', 'Concepción', '2025-09-01', 0),
+(28, 'Valentina', 'Pérez', 'alumno028@ejemplo.cl', '+56980000028', 'Temuco', '2025-09-10', 1),
+(29, 'Matías', 'Silva', 'alumno029@ejemplo.cl', '+56980000029', 'La Serena', '2025-09-19', 1),
+(30, 'Fernanda', 'Morales', 'alumno030@ejemplo.cl', '+56980000030', 'Antofagasta', '2025-09-28', 1),
+(31, 'Sebastián', 'Fuentes', 'alumno031@ejemplo.cl', '+56980000031', 'Rancagua', '2025-10-07', 1),
+(32, 'Catalina', 'Araya', 'alumno032@ejemplo.cl', '+56980000032', 'Talca', '2025-10-16', 1),
+(33, 'Joaquín', 'Valenzuela', 'alumno033@ejemplo.cl', '+56980000033', 'Puerto Montt', '2025-10-25', 1),
+(34, 'Antonia', 'Rojas', 'alumno034@ejemplo.cl', '+56980000034', 'Iquique', '2025-11-03', 1),
+(35, 'Benjamín', 'Soto', 'alumno035@ejemplo.cl', '+56980000035', 'Arica', '2025-11-12', 1),
+(36, 'Francisca', 'Martínez', 'alumno036@ejemplo.cl', '+56980000036', 'Chillán', '2025-11-21', 0),
+(37, 'Vicente', 'Rodríguez', 'alumno037@ejemplo.cl', '+56980000037', 'Osorno', '2025-11-30', 1),
+(38, 'Daniela', 'Hernández', 'alumno038@ejemplo.cl', '+56980000038', 'Copiapó', '2025-12-09', 1),
+(39, 'Tomás', 'Flores', 'alumno039@ejemplo.cl', '+56980000039', 'Quilpué', '2025-12-18', 1),
+(40, 'Isidora', 'González', 'alumno040@ejemplo.cl', '+56980000040', 'Los Ángeles', '2025-12-27', 1),
+(41, 'Felipe', 'Díaz', 'alumno041@ejemplo.cl', '+56980000041', 'Santiago', '2026-01-05', 1),
+(42, 'Paula', 'Contreras', 'alumno042@ejemplo.cl', '+56980000042', 'Puente Alto', '2026-01-14', 1),
+(43, 'Nicolás', 'Sepúlveda', 'alumno043@ejemplo.cl', '+56980000043', 'Maipú', '2026-01-23', 1),
+(44, 'Constanza', 'López', 'alumno044@ejemplo.cl', '+56980000044', 'La Florida', '2026-02-01', 1),
+(45, 'Gabriel', 'Torres', 'alumno045@ejemplo.cl', '+56980000045', 'Valparaíso', '2026-02-10', 0),
+(46, 'Josefa', 'Espinoza', 'alumno046@ejemplo.cl', '+56980000046', 'Viña del Mar', '2026-02-19', 1),
+(47, 'Ignacio', 'Muñoz', 'alumno047@ejemplo.cl', '+56980000047', 'Concepción', '2026-02-28', 1),
+(48, 'Carolina', 'Pérez', 'alumno048@ejemplo.cl', '+56980000048', 'Temuco', '2026-03-09', 1),
+(49, 'Cristóbal', 'Silva', 'alumno049@ejemplo.cl', '+56980000049', 'La Serena', '2026-03-18', 1),
+(50, 'Macarena', 'Morales', 'alumno050@ejemplo.cl', '+56980000050', 'Antofagasta', '2026-03-27', 1);
 
-INSERT INTO numeros (n)
-WITH RECURSIVE secuencia AS (
-    SELECT 1 AS n
-    UNION ALL
-    SELECT n + 1
-    FROM secuencia
-    WHERE n < 100
-)
-SELECT n
-FROM secuencia;
+-- especialidades: 10 registros
+INSERT INTO especialidades (id_especialidad, nombre, descripcion, activo) VALUES
+(1, 'Desarrollo web', 'Especialidad tecnológica: Desarrollo web', 1),
+(2, 'Programación Python', 'Especialidad tecnológica: Programación Python', 1),
+(3, 'Bases de datos SQL', 'Especialidad tecnológica: Bases de datos SQL', 1),
+(4, 'Ciberseguridad', 'Especialidad tecnológica: Ciberseguridad', 1),
+(5, 'Inteligencia artificial', 'Especialidad tecnológica: Inteligencia artificial', 1),
+(6, 'Ciencia de datos', 'Especialidad tecnológica: Ciencia de datos', 1),
+(7, 'Computación en la nube', 'Especialidad tecnológica: Computación en la nube', 1),
+(8, 'Redes y telecomunicaciones', 'Especialidad tecnológica: Redes y telecomunicaciones', 1),
+(9, 'Desarrollo móvil', 'Especialidad tecnológica: Desarrollo móvil', 1),
+(10, 'DevOps y automatización', 'Especialidad tecnológica: DevOps y automatización', 1);
 
-INSERT INTO estudiantes (
-    id_estudiante, nombre, apellido, correo, telefono, ciudad,
-    fecha_registro, activo
-)
-SELECT
-    n,
-    CONCAT('Estudiante ', n),
-    CONCAT('Apellido ', n),
-    CONCAT('estudiante', n, '@example.com'),
-    CONCAT('9', LPAD(n, 8, '0')),
-    ELT(((n - 1) % 10) + 1, 'Santiago', 'Valparaiso', 'Concepcion',
-        'La Serena', 'Temuco', 'Rancagua', 'Talca', 'Valdivia',
-        'Arica', 'Puerto Montt'),
-    DATE_ADD('2026-01-01', INTERVAL (n - 1) DAY),
-    TRUE
-FROM numeros;
+-- profesores: 10 registros
+INSERT INTO profesores (id_profesor, nombre, apellido, correo, telefono, activo) VALUES
+(1, 'Andrea', 'Muñoz', 'profesor01@academia-ejemplo.cl', '+56970000001', 1),
+(2, 'Felipe', 'Rojas', 'profesor02@academia-ejemplo.cl', '+56970000002', 0),
+(3, 'Valentina', 'Castro', 'profesor03@academia-ejemplo.cl', '+56970000003', 1),
+(4, 'Matías', 'Fuentes', 'profesor04@academia-ejemplo.cl', '+56970000004', 1),
+(5, 'Camila', 'Vega', 'profesor05@academia-ejemplo.cl', '+56970000005', 1),
+(6, 'Diego', 'Morales', 'profesor06@academia-ejemplo.cl', '+56970000006', 1),
+(7, 'Francisca', 'Silva', 'profesor07@academia-ejemplo.cl', '+56970000007', 1),
+(8, 'Javier', 'Contreras', 'profesor08@academia-ejemplo.cl', '+56970000008', 1),
+(9, 'Paula', 'Navarro', 'profesor09@academia-ejemplo.cl', '+56970000009', 1),
+(10, 'Sebastián', 'Torres', 'profesor10@academia-ejemplo.cl', '+56970000010', 0);
 
-INSERT INTO especialidades (
-    id_especialidad, nombre, descripcion, activo
-)
-SELECT
-    n,
-    CONCAT('Especialidad ', n),
-    CONCAT('Descripcion de la especialidad ', n),
-    TRUE
-FROM numeros;
+-- categorias: 10 registros
+INSERT INTO categorias (id_categoria, nombre, descripcion, activo) VALUES
+(1, 'Programación', 'Cursos y formación en programación', 1),
+(2, 'Bases de datos', 'Cursos y formación en bases de datos', 1),
+(3, 'Analítica de datos', 'Cursos y formación en analítica de datos', 1),
+(4, 'Inteligencia artificial', 'Cursos y formación en inteligencia artificial', 1),
+(5, 'Seguridad informática', 'Cursos y formación en seguridad informática', 1),
+(6, 'Infraestructura TI', 'Cursos y formación en infraestructura ti', 0),
+(7, 'Cloud Computing', 'Cursos y formación en cloud computing', 1),
+(8, 'Desarrollo de software', 'Cursos y formación en desarrollo de software', 1),
+(9, 'Automatización tecnológica', 'Cursos y formación en automatización tecnológica', 1),
+(10, 'Redes informáticas', 'Cursos y formación en redes informáticas', 1);
 
-INSERT INTO profesores (
-    id_profesor, nombre, apellido, correo, telefono, activo
-)
-SELECT
-    n,
-    CONCAT('Profesor ', n),
-    CONCAT('Apellido ', n),
-    CONCAT('profesor', n, '@example.com'),
-    CONCAT('9', LPAD(n + 100, 8, '0')),
-    TRUE
-FROM numeros;
+-- medios_pago: 5 registros
+INSERT INTO medios_pago (id_medio_pago, nombre, descripcion, activo) VALUES
+(1, 'Efectivo', 'Pago presencial en efectivo', 1),
+(2, 'Tarjeta de débito', 'Pago con tarjeta de débito', 1),
+(3, 'Tarjeta de crédito', 'Pago con tarjeta de crédito; las cuotas bancarias no se registran como cuotas de la academia', 1),
+(4, 'Cheque al día', 'Cheque pagadero a la vista', 1),
+(5, 'Transferencia bancaria', 'Transferencia electrónica bancaria', 1);
 
-INSERT INTO categorias (
-    id_categoria, nombre, descripcion, activo
-)
-SELECT
-    n,
-    CONCAT('Categoria ', n),
-    CONCAT('Descripcion de la categoria ', n),
-    TRUE
-FROM numeros;
+INSERT INTO descuentos (id_descuento, nombre, descripcion, tipo_descuento, valor, fecha_inicio, fecha_termino, activo) VALUES
+(1, 'Bienvenida 10%', 'Promoción de primera inscripción', 'porcentaje', 10, '2025-01-01', '2027-12-31', 1),
+(2, 'Estudiante 15%', 'Beneficio para estudiantes', 'porcentaje', 15, '2025-01-01', '2027-12-31', 1),
+(3, 'Convenio 20%', 'Convenio institucional', 'porcentaje', 20, '2025-01-01', '2027-12-31', 1),
+(4, 'Temporada 5%', 'Promoción de temporada', 'porcentaje', 5, '2025-01-01', '2027-12-31', 0),
+(5, 'Fidelidad 12%', 'Descuento para estudiantes recurrentes', 'porcentaje', 12, '2025-01-01', '2027-12-31', 1),
+(6, 'Descuento $10000', 'Rebaja fija de diez mil pesos', 'monto_fijo', 10000, '2025-01-01', '2027-12-31', 1),
+(7, 'Descuento $15000', 'Rebaja fija de quince mil pesos', 'monto_fijo', 15000, '2025-01-01', '2027-12-31', 1),
+(8, 'Descuento $25000', 'Rebaja fija de veinticinco mil pesos', 'monto_fijo', 25000, '2025-01-01', '2027-12-31', 0),
+(9, 'Campaña 30%', 'Campaña promocional especial', 'porcentaje', 30, '2025-01-01', '2027-12-31', 1),
+(10, 'Descuento $5000', 'Rebaja fija de cinco mil pesos', 'monto_fijo', 5000, '2025-01-01', '2027-12-31', 1);
 
-INSERT INTO medios_pago (
-    id_medio_pago, nombre, descripcion, activo
-)
-SELECT
-    n,
-    CONCAT('Medio de pago ', n),
-    CONCAT('Descripcion del medio de pago ', n),
-    TRUE
-FROM numeros;
+-- profesores_especialidades: 20 registros
+INSERT INTO profesores_especialidades (id_profesor, id_especialidad, fecha_asignacion) VALUES
+(1, 1, '2025-01-15'),
+(2, 2, '2025-01-15'),
+(3, 3, '2025-01-15'),
+(4, 4, '2025-01-15'),
+(5, 5, '2025-01-15'),
+(6, 6, '2025-01-15'),
+(7, 7, '2025-01-15'),
+(8, 8, '2025-01-15'),
+(9, 9, '2025-01-15'),
+(10, 10, '2025-01-15'),
+(1, 2, '2025-01-15'),
+(2, 3, '2025-01-15'),
+(3, 4, '2025-01-15'),
+(4, 5, '2025-01-15'),
+(5, 6, '2025-01-15'),
+(6, 7, '2025-01-15'),
+(7, 8, '2025-01-15'),
+(8, 9, '2025-01-15'),
+(9, 10, '2025-01-15'),
+(10, 1, '2025-01-15');
 
-INSERT INTO descuentos (
-    id_descuento, nombre, descripcion, tipo_descuento, valor,
-    fecha_inicio, fecha_termino, activo
-)
-SELECT
-    n,
-    CONCAT('Descuento ', n),
-    CONCAT('Beneficio promocional numero ', n),
-    CASE WHEN MOD(n, 2) = 0 THEN 'porcentaje' ELSE 'monto_fijo' END,
-    CASE WHEN MOD(n, 2) = 0 THEN MOD(n, 25) + 5 ELSE 5000 + (n * 100) END,
-    '2026-01-01',
-    '2026-12-31',
-    TRUE
-FROM numeros;
+-- cursos: 15 registros
+INSERT INTO cursos (id_curso, nombre, descripcion, precio_base, fecha_inicio, fecha_termino, duracion_horas, cupo_maximo, modalidad, nivel, estado, id_profesor, id_categoria, id_especialidad) VALUES
+(1, 'Introducción a Python', 'Curso práctico de introducción a python', 107500, '2026-01-12', '2026-03-06', 36, 25, 'presencial', 'intermedio', 'finalizado', 2, 1, 2),
+(2, 'SQL y modelamiento relacional', 'Curso práctico de sql y modelamiento relacional', 125000, '2026-02-02', '2026-04-03', 48, 30, 'hibrida', 'avanzado', 'finalizado', 3, 2, 3),
+(3, 'Desarrollo web con HTML y CSS', 'Curso práctico de desarrollo web con html y css', 142500, '2026-03-02', '2026-05-15', 60, 35, 'online', 'basico', 'finalizado', 1, 8, 1),
+(4, 'Análisis de datos con Power BI', 'Curso práctico de análisis de datos con power bi', 160000, '2026-04-06', '2026-06-26', 72, 20, 'presencial', 'intermedio', 'finalizado', 6, 3, 6),
+(5, 'Fundamentos de ciberseguridad', 'Curso práctico de fundamentos de ciberseguridad', 177500, '2026-09-07', '2026-12-04', 24, 25, 'hibrida', 'avanzado', 'en_curso', 4, 5, 4),
+(6, 'Machine Learning aplicado', 'Curso práctico de machine learning aplicado', 195000, '2026-08-10', '2026-11-27', 36, 30, 'online', 'basico', 'en_curso', 5, 4, 5),
+(7, 'Administración de redes', 'Curso práctico de administración de redes', 212500, '2026-10-05', '2027-01-22', 48, 35, 'presencial', 'intermedio', 'en_curso', 8, 10, 8),
+(8, 'Servicios cloud con AWS', 'Curso práctico de servicios cloud con aws', 230000, '2026-09-14', '2026-12-18', 60, 20, 'hibrida', 'avanzado', 'en_curso', 7, 7, 7),
+(9, 'Desarrollo de apps móviles', 'Curso práctico de desarrollo de apps móviles', 247500, '2026-10-12', '2027-02-12', 72, 25, 'online', 'basico', 'en_curso', 9, 8, 9),
+(10, 'Automatización con Python', 'Curso práctico de automatización con python', 265000, '2027-01-11', '2027-03-26', 24, 30, 'presencial', 'intermedio', 'programado', 1, 9, 1),
+(11, 'DevOps con Docker y CI/CD', 'Curso práctico de devops con docker y ci/cd', 282500, '2027-02-01', '2027-04-30', 36, 35, 'hibrida', 'avanzado', 'programado', 1, 9, 1),
+(12, 'SQL avanzado y optimización', 'Curso práctico de sql avanzado y optimización', 300000, '2027-03-01', '2027-05-28', 48, 20, 'online', 'basico', 'programado', 3, 2, 3),
+(13, 'Introducción a IA generativa', 'Curso práctico de introducción a ia generativa', 317500, '2027-04-05', '2027-06-25', 60, 25, 'presencial', 'intermedio', 'programado', 5, 4, 5),
+(14, 'Seguridad de redes corporativas', 'Curso práctico de seguridad de redes corporativas', 335000, '2026-10-19', '2026-12-11', 72, 30, 'hibrida', 'avanzado', 'cancelado', 4, 5, 4),
+(15, 'Desarrollo web con JavaScript', 'Curso práctico de desarrollo web con javascript', 352500, '2026-09-21', '2026-11-20', 24, 35, 'online', 'basico', 'cancelado', 1, 1, 1);
 
-INSERT INTO profesores_especialidades (
-    id_profesor, id_especialidad, fecha_asignacion
-)
-SELECT
-    n,
-    n,
-    DATE_ADD('2025-01-01', INTERVAL (n - 1) DAY)
-FROM numeros;
+-- inscripciones: 50 registros
+INSERT INTO inscripciones (id_inscripcion, fecha, importe_final, estado, estado_academico, fecha_cancelacion, observaciones, id_estudiante, id_curso, id_descuento) VALUES
+(1, '2025-12-18', 96750, 'finalizada', 'reprobado', NULL, NULL, 4, 1, 1),
+(2, '2025-12-18', 91375, 'finalizada', 'aprobado', NULL, NULL, 12, 1, 2),
+(3, '2025-12-18', 86000, 'finalizada', 'aprobado', NULL, NULL, 20, 1, 3),
+(4, '2025-12-18', 94600, 'finalizada', 'aprobado', NULL, NULL, 28, 1, 5),
+(5, '2025-12-18', 97500, 'finalizada', 'reprobado', NULL, NULL, 5, 1, 6),
+(6, '2025-12-18', 92500, 'finalizada', 'aprobado', NULL, NULL, 13, 1, 7),
+(7, '2026-01-08', 87500, 'finalizada', 'reprobado', NULL, NULL, 23, 2, 9),
+(8, '2026-01-08', 120000, 'finalizada', 'aprobado', NULL, NULL, 31, 2, 10),
+(9, '2026-01-08', 125000, 'finalizada', 'aprobado', NULL, NULL, 7, 2, NULL),
+(10, '2026-01-08', 112500, 'finalizada', 'aprobado', NULL, NULL, 15, 2, 1),
+(11, '2026-01-08', 106250, 'finalizada', 'reprobado', NULL, NULL, 24, 2, 2),
+(12, '2026-01-08', 100000, 'finalizada', 'aprobado', NULL, NULL, 1, 2, 3),
+(13, '2026-02-05', 125400, 'finalizada', 'reprobado', NULL, NULL, 11, 3, 5),
+(14, '2026-02-05', 132500, 'finalizada', 'aprobado', NULL, NULL, 19, 3, 6),
+(15, '2026-02-05', 127500, 'finalizada', 'aprobado', NULL, NULL, 26, 3, 7),
+(16, '2026-02-05', 99750, 'finalizada', 'aprobado', NULL, NULL, 3, 3, 9),
+(17, '2026-02-05', 137500, 'finalizada', 'reprobado', NULL, NULL, 12, 3, 10),
+(18, '2026-02-05', 142500, 'finalizada', 'aprobado', NULL, NULL, 20, 3, NULL),
+(19, '2026-03-12', 144000, 'finalizada', 'reprobado', NULL, NULL, 30, 4, 1),
+(20, '2026-03-12', 136000, 'finalizada', 'aprobado', NULL, NULL, 6, 4, 2),
+(21, '2026-03-12', 128000, 'finalizada', 'aprobado', NULL, NULL, 14, 4, 3),
+(22, '2026-03-12', 140800, 'finalizada', 'aprobado', NULL, NULL, 22, 4, 5),
+(23, '2026-03-12', 150000, 'finalizada', 'reprobado', NULL, NULL, 31, 4, 6),
+(24, '2026-03-12', 145000, 'finalizada', 'aprobado', NULL, NULL, 7, 4, 7),
+(25, '2026-08-13', 124250, 'activa', 'en_curso', NULL, NULL, 17, 5, 9),
+(26, '2026-08-13', 172500, 'activa', 'en_curso', NULL, NULL, 25, 5, 10),
+(27, '2026-08-13', 177500, 'activa', 'en_curso', NULL, NULL, 2, 5, NULL),
+(28, '2026-08-13', 159750, 'activa', 'en_curso', NULL, NULL, 10, 5, 1),
+(29, '2026-08-13', 150875, 'activa', 'en_curso', NULL, NULL, 19, 5, 2),
+(30, '2026-07-16', 156000, 'activa', 'en_curso', NULL, NULL, 29, 6, 3),
+(31, '2026-07-16', 171600, 'activa', 'en_curso', NULL, NULL, 5, 6, 5),
+(32, '2026-07-16', 185000, 'activa', 'en_curso', NULL, NULL, 13, 6, 6),
+(33, '2026-07-16', 180000, 'activa', 'en_curso', NULL, NULL, 21, 6, 7),
+(34, '2026-07-16', 136500, 'activa', 'en_curso', NULL, NULL, 30, 6, 9),
+(35, '2026-09-10', 207500, 'activa', 'en_curso', NULL, NULL, 8, 7, 10),
+(36, '2026-09-10', 212500, 'activa', 'en_curso', NULL, NULL, 16, 7, NULL),
+(37, '2026-09-10', 191250, 'activa', 'en_curso', NULL, NULL, 24, 7, 1),
+(38, '2026-09-10', 180625, 'activa', 'en_curso', NULL, NULL, 1, 7, 2),
+(39, '2026-09-10', 170000, 'activa', 'en_curso', NULL, NULL, 10, 7, 3),
+(40, '2026-08-20', 202400, 'activa', 'en_curso', NULL, NULL, 20, 8, 5),
+(41, '2026-08-20', 220000, 'activa', 'en_curso', NULL, NULL, 28, 8, 6),
+(42, '2026-08-20', 215000, 'activa', 'en_curso', NULL, NULL, 4, 8, 7),
+(43, '2026-08-20', 161000, 'activa', 'en_curso', NULL, NULL, 12, 8, 9),
+(44, '2026-09-17', 242500, 'activa', 'en_curso', NULL, NULL, 23, 9, 10),
+(45, '2026-09-17', 247500, 'activa', 'en_curso', NULL, NULL, 31, 9, NULL),
+(46, '2026-09-17', 222750, 'activa', 'en_curso', NULL, NULL, 7, 9, 1),
+(47, '2026-10-01', 225250, 'activa', 'no_iniciado', NULL, NULL, 19, 10, 2),
+(48, '2026-10-01', 226000, 'activa', 'no_iniciado', NULL, NULL, 30, 11, 3),
+(49, '2026-09-24', 0, 'cancelada', 'retirado', '2026-09-27', NULL, 16, 14, 5),
+(50, '2026-08-27', 0, 'cancelada', 'retirado', '2026-08-30', NULL, 28, 15, 6);
 
-INSERT INTO cursos (
-    id_curso, nombre, descripcion, precio_base, fecha_inicio,
-    fecha_termino, duracion_horas, cupo_maximo, modalidad, nivel,
-    estado, id_profesor, id_categoria, id_especialidad
-)
-SELECT
-    n,
-    CONCAT('Curso ', n),
-    CONCAT('Descripcion del curso ', n),
-    50000 + (n * 1000),
-    DATE_ADD('2026-03-01', INTERVAL (n - 1) DAY),
-    DATE_ADD('2026-04-30', INTERVAL (n - 1) DAY),
-    20 + MOD(n, 41),
-    10 + MOD(n, 41),
-    ELT(((n - 1) % 3) + 1, 'presencial', 'online', 'hibrida'),
-    ELT(((n - 1) % 3) + 1, 'basico', 'intermedio', 'avanzado'),
-    ELT(((n - 1) % 4) + 1, 'programado', 'en_curso', 'finalizado',
-        'cancelado'),
-    n,
-    MOD(n - 1, 10) + 1,
-    n
-FROM numeros;
+-- planes_pago: 50 registros
+INSERT INTO planes_pago (id_plan_pago, modalidad_pago, numero_cuotas, monto_total, fecha_acuerdo, id_inscripcion) VALUES
+(1, 'contado', 1, 96750, '2025-12-18', 1),
+(2, 'cuotas', 2, 91375, '2025-12-18', 2),
+(3, 'cuotas', 3, 86000, '2025-12-18', 3),
+(4, 'cuotas', 4, 94600, '2025-12-18', 4),
+(5, 'cuotas', 6, 97500, '2025-12-18', 5),
+(6, 'contado', 1, 92500, '2025-12-18', 6),
+(7, 'cuotas', 2, 87500, '2026-01-08', 7),
+(8, 'cuotas', 3, 120000, '2026-01-08', 8),
+(9, 'cuotas', 4, 125000, '2026-01-08', 9),
+(10, 'cuotas', 6, 112500, '2026-01-08', 10),
+(11, 'contado', 1, 106250, '2026-01-08', 11),
+(12, 'cuotas', 2, 100000, '2026-01-08', 12),
+(13, 'cuotas', 3, 125400, '2026-02-05', 13),
+(14, 'cuotas', 4, 132500, '2026-02-05', 14),
+(15, 'cuotas', 6, 127500, '2026-02-05', 15),
+(16, 'contado', 1, 99750, '2026-02-05', 16),
+(17, 'cuotas', 2, 137500, '2026-02-05', 17),
+(18, 'cuotas', 3, 142500, '2026-02-05', 18),
+(19, 'cuotas', 4, 144000, '2026-03-12', 19),
+(20, 'cuotas', 6, 136000, '2026-03-12', 20),
+(21, 'contado', 1, 128000, '2026-03-12', 21),
+(22, 'cuotas', 2, 140800, '2026-03-12', 22),
+(23, 'cuotas', 3, 150000, '2026-03-12', 23),
+(24, 'cuotas', 4, 145000, '2026-03-12', 24),
+(25, 'cuotas', 6, 124250, '2026-08-13', 25),
+(26, 'contado', 1, 172500, '2026-08-13', 26),
+(27, 'cuotas', 2, 177500, '2026-08-13', 27),
+(28, 'cuotas', 3, 159750, '2026-08-13', 28),
+(29, 'cuotas', 4, 150875, '2026-08-13', 29),
+(30, 'cuotas', 6, 156000, '2026-07-16', 30),
+(31, 'contado', 1, 171600, '2026-07-16', 31),
+(32, 'cuotas', 2, 185000, '2026-07-16', 32),
+(33, 'cuotas', 3, 180000, '2026-07-16', 33),
+(34, 'cuotas', 4, 136500, '2026-07-16', 34),
+(35, 'cuotas', 6, 207500, '2026-09-10', 35),
+(36, 'contado', 1, 212500, '2026-09-10', 36),
+(37, 'cuotas', 2, 191250, '2026-09-10', 37),
+(38, 'cuotas', 3, 180625, '2026-09-10', 38),
+(39, 'cuotas', 4, 170000, '2026-09-10', 39),
+(40, 'cuotas', 6, 202400, '2026-08-20', 40),
+(41, 'contado', 1, 220000, '2026-08-20', 41),
+(42, 'cuotas', 2, 215000, '2026-08-20', 42),
+(43, 'cuotas', 3, 161000, '2026-08-20', 43),
+(44, 'cuotas', 4, 242500, '2026-09-17', 44),
+(45, 'cuotas', 6, 247500, '2026-09-17', 45),
+(46, 'contado', 1, 222750, '2026-09-17', 46),
+(47, 'cuotas', 2, 225250, '2026-10-01', 47),
+(48, 'cuotas', 3, 226000, '2026-10-01', 48),
+(49, 'contado', 1, 0, '2026-09-24', 49),
+(50, 'contado', 1, 0, '2026-08-27', 50);
 
-INSERT INTO inscripciones (
-    id_inscripcion, fecha, importe_final, estado, estado_academico,
-    fecha_cancelacion, observaciones, id_estudiante, id_curso,
-    id_descuento
-)
-SELECT
-    n,
-    DATE_ADD('2026-02-01', INTERVAL (n - 1) DAY),
-    50000 + (n * 1000),
-    'activa',
-    'no_iniciado',
-    NULL,
-    CONCAT('Inscripcion de prueba ', n),
-    n,
-    n,
-    n
-FROM numeros;
+-- cuotas: 152 registros
+INSERT INTO cuotas (id_cuota, numero_cuota, monto_programado, fecha_vencimiento, id_plan_pago) VALUES
+(1, 1, 96750, '2025-12-18', 1),
+(2, 1, 45688, '2025-12-25', 2),
+(3, 2, 45687, '2026-01-24', 2),
+(4, 1, 28667, '2025-12-25', 3),
+(5, 2, 28667, '2026-01-24', 3),
+(6, 3, 28666, '2026-02-23', 3),
+(7, 1, 23650, '2025-12-25', 4),
+(8, 2, 23650, '2026-01-24', 4),
+(9, 3, 23650, '2026-02-23', 4),
+(10, 4, 23650, '2026-03-25', 4),
+(11, 1, 16250, '2025-12-25', 5),
+(12, 2, 16250, '2026-01-24', 5),
+(13, 3, 16250, '2026-02-23', 5),
+(14, 4, 16250, '2026-03-25', 5),
+(15, 5, 16250, '2026-04-24', 5),
+(16, 6, 16250, '2026-05-24', 5),
+(17, 1, 92500, '2025-12-18', 6),
+(18, 1, 43750, '2026-01-15', 7),
+(19, 2, 43750, '2026-02-14', 7),
+(20, 1, 40000, '2026-01-15', 8),
+(21, 2, 40000, '2026-02-14', 8),
+(22, 3, 40000, '2026-03-16', 8),
+(23, 1, 31250, '2026-01-15', 9),
+(24, 2, 31250, '2026-02-14', 9),
+(25, 3, 31250, '2026-03-16', 9),
+(26, 4, 31250, '2026-04-15', 9),
+(27, 1, 18750, '2026-01-15', 10),
+(28, 2, 18750, '2026-02-14', 10),
+(29, 3, 18750, '2026-03-16', 10),
+(30, 4, 18750, '2026-04-15', 10),
+(31, 5, 18750, '2026-05-15', 10),
+(32, 6, 18750, '2026-06-14', 10),
+(33, 1, 106250, '2026-01-08', 11),
+(34, 1, 50000, '2026-01-15', 12),
+(35, 2, 50000, '2026-02-14', 12),
+(36, 1, 41800, '2026-02-12', 13),
+(37, 2, 41800, '2026-03-14', 13),
+(38, 3, 41800, '2026-04-13', 13),
+(39, 1, 33125, '2026-02-12', 14),
+(40, 2, 33125, '2026-03-14', 14),
+(41, 3, 33125, '2026-04-13', 14),
+(42, 4, 33125, '2026-05-13', 14),
+(43, 1, 21250, '2026-02-12', 15),
+(44, 2, 21250, '2026-03-14', 15),
+(45, 3, 21250, '2026-04-13', 15),
+(46, 4, 21250, '2026-05-13', 15),
+(47, 5, 21250, '2026-06-12', 15),
+(48, 6, 21250, '2026-07-12', 15),
+(49, 1, 99750, '2026-02-05', 16),
+(50, 1, 68750, '2026-02-12', 17),
+(51, 2, 68750, '2026-03-14', 17),
+(52, 1, 47500, '2026-02-12', 18),
+(53, 2, 47500, '2026-03-14', 18),
+(54, 3, 47500, '2026-04-13', 18),
+(55, 1, 36000, '2026-03-19', 19),
+(56, 2, 36000, '2026-04-18', 19),
+(57, 3, 36000, '2026-05-18', 19),
+(58, 4, 36000, '2026-06-17', 19),
+(59, 1, 22667, '2026-03-19', 20),
+(60, 2, 22667, '2026-04-18', 20),
+(61, 3, 22667, '2026-05-18', 20),
+(62, 4, 22667, '2026-06-17', 20),
+(63, 5, 22666, '2026-07-17', 20),
+(64, 6, 22666, '2026-08-16', 20),
+(65, 1, 128000, '2026-03-12', 21),
+(66, 1, 70400, '2026-03-19', 22),
+(67, 2, 70400, '2026-04-18', 22),
+(68, 1, 50000, '2026-03-19', 23),
+(69, 2, 50000, '2026-04-18', 23),
+(70, 3, 50000, '2026-05-18', 23),
+(71, 1, 36250, '2026-03-19', 24),
+(72, 2, 36250, '2026-04-18', 24),
+(73, 3, 36250, '2026-05-18', 24),
+(74, 4, 36250, '2026-06-17', 24),
+(75, 1, 20709, '2026-08-20', 25),
+(76, 2, 20709, '2026-09-19', 25),
+(77, 3, 20708, '2026-10-19', 25),
+(78, 4, 20708, '2026-11-18', 25),
+(79, 5, 20708, '2026-12-18', 25),
+(80, 6, 20708, '2027-01-17', 25),
+(81, 1, 172500, '2026-08-13', 26),
+(82, 1, 88750, '2026-08-20', 27),
+(83, 2, 88750, '2026-09-19', 27),
+(84, 1, 53250, '2026-08-20', 28),
+(85, 2, 53250, '2026-09-19', 28),
+(86, 3, 53250, '2026-10-19', 28),
+(87, 1, 37719, '2026-08-20', 29),
+(88, 2, 37719, '2026-09-19', 29),
+(89, 3, 37719, '2026-10-19', 29),
+(90, 4, 37718, '2026-11-18', 29),
+(91, 1, 26000, '2026-07-23', 30),
+(92, 2, 26000, '2026-08-22', 30),
+(93, 3, 26000, '2026-09-21', 30),
+(94, 4, 26000, '2026-10-21', 30),
+(95, 5, 26000, '2026-11-20', 30),
+(96, 6, 26000, '2026-12-20', 30),
+(97, 1, 171600, '2026-07-16', 31),
+(98, 1, 92500, '2026-07-23', 32),
+(99, 2, 92500, '2026-08-22', 32),
+(100, 1, 60000, '2026-07-23', 33),
+(101, 2, 60000, '2026-08-22', 33),
+(102, 3, 60000, '2026-09-21', 33),
+(103, 1, 34125, '2026-07-23', 34),
+(104, 2, 34125, '2026-08-22', 34),
+(105, 3, 34125, '2026-09-21', 34),
+(106, 4, 34125, '2026-10-21', 34),
+(107, 1, 34584, '2026-09-17', 35),
+(108, 2, 34584, '2026-10-17', 35),
+(109, 3, 34583, '2026-11-16', 35),
+(110, 4, 34583, '2026-12-16', 35),
+(111, 5, 34583, '2027-01-15', 35),
+(112, 6, 34583, '2027-02-14', 35),
+(113, 1, 212500, '2026-09-10', 36),
+(114, 1, 95625, '2026-09-17', 37),
+(115, 2, 95625, '2026-10-17', 37),
+(116, 1, 60209, '2026-09-17', 38),
+(117, 2, 60208, '2026-10-17', 38),
+(118, 3, 60208, '2026-11-16', 38),
+(119, 1, 42500, '2026-09-17', 39),
+(120, 2, 42500, '2026-10-17', 39),
+(121, 3, 42500, '2026-11-16', 39),
+(122, 4, 42500, '2026-12-16', 39),
+(123, 1, 33734, '2026-08-27', 40),
+(124, 2, 33734, '2026-09-26', 40),
+(125, 3, 33733, '2026-10-26', 40),
+(126, 4, 33733, '2026-11-25', 40),
+(127, 5, 33733, '2026-12-25', 40),
+(128, 6, 33733, '2027-01-24', 40),
+(129, 1, 220000, '2026-08-20', 41),
+(130, 1, 107500, '2026-08-27', 42),
+(131, 2, 107500, '2026-09-26', 42),
+(132, 1, 53667, '2026-08-27', 43),
+(133, 2, 53667, '2026-09-26', 43),
+(134, 3, 53666, '2026-10-26', 43),
+(135, 1, 60625, '2026-09-24', 44),
+(136, 2, 60625, '2026-10-24', 44),
+(137, 3, 60625, '2026-11-23', 44),
+(138, 4, 60625, '2026-12-23', 44),
+(139, 1, 41250, '2026-09-24', 45),
+(140, 2, 41250, '2026-10-24', 45),
+(141, 3, 41250, '2026-11-23', 45),
+(142, 4, 41250, '2026-12-23', 45),
+(143, 5, 41250, '2027-01-22', 45),
+(144, 6, 41250, '2027-02-21', 45),
+(145, 1, 222750, '2026-09-17', 46),
+(146, 1, 112625, '2026-10-08', 47),
+(147, 2, 112625, '2026-11-07', 47),
+(148, 1, 75334, '2026-10-08', 48),
+(149, 2, 75333, '2026-11-07', 48),
+(150, 3, 75333, '2026-12-07', 48),
+(151, 1, 0, '2026-09-24', 49),
+(152, 1, 0, '2026-08-27', 50);
 
-INSERT INTO planes_pago (
-    id_plan_pago, modalidad_pago, numero_cuotas, monto_total,
-    fecha_acuerdo, id_inscripcion
-)
-SELECT
-    n,
-    'contado',
-    1,
-    50000 + (n * 1000),
-    DATE_ADD('2026-02-01', INTERVAL (n - 1) DAY),
-    n
-FROM numeros;
+-- pagos: 71 registros
+INSERT INTO pagos (id_pago, fecha_pago, monto_pagado, estado_pago, id_cuota, id_medio_pago) VALUES
+(1, '2025-12-18', 96750, 'confirmado', 1, 3),
+(2, '2025-12-25', 45688, 'confirmado', 2, 4),
+(3, '2026-01-24', 45687, 'confirmado', 3, 5),
+(4, '2025-12-25', 28667, 'confirmado', 4, 5),
+(5, '2026-02-23', 28666, 'confirmado', 6, 2),
+(6, '2025-12-25', 11825, 'confirmado', 7, 1),
+(7, '2025-12-18', 92500, 'confirmado', 17, 3),
+(8, '2026-01-15', 43750, 'confirmado', 18, 4),
+(9, '2026-02-14', 43750, 'confirmado', 19, 5),
+(10, '2026-01-15', 20000, 'confirmado', 20, 5),
+(11, '2026-01-15', 31250, 'confirmado', 23, 1),
+(12, '2026-03-16', 31250, 'confirmado', 25, 3),
+(13, '2026-01-08', 106250, 'confirmado', 33, 3),
+(14, '2026-01-15', 25000, 'confirmado', 34, 4),
+(15, '2026-02-12', 41800, 'confirmado', 36, 5),
+(16, '2026-03-14', 41800, 'confirmado', 37, 1),
+(17, '2026-04-13', 41800, 'confirmado', 38, 2),
+(18, '2026-02-12', 33125, 'confirmado', 39, 1),
+(19, '2026-03-14', 33125, 'confirmado', 40, 2),
+(20, '2026-04-13', 33125, 'confirmado', 41, 3),
+(21, '2026-05-13', 33125, 'confirmado', 42, 4),
+(22, '2026-02-05', 49875, 'confirmado', 49, 3),
+(23, '2026-02-12', 68750, 'confirmado', 50, 4),
+(24, '2026-03-14', 68750, 'confirmado', 51, 5),
+(25, '2026-02-12', 47500, 'confirmado', 52, 5),
+(26, '2026-04-13', 47500, 'confirmado', 54, 2),
+(27, '2026-03-19', 36000, 'confirmado', 55, 1),
+(28, '2026-04-18', 36000, 'confirmado', 56, 2),
+(29, '2026-05-18', 36000, 'confirmado', 57, 3),
+(30, '2026-06-17', 36000, 'confirmado', 58, 4),
+(31, '2026-03-12', 128000, 'confirmado', 65, 3),
+(32, '2026-03-19', 70400, 'confirmado', 66, 4),
+(33, '2026-04-18', 70400, 'confirmado', 67, 5),
+(34, '2026-03-19', 50000, 'confirmado', 68, 5),
+(35, '2026-04-18', 50000, 'confirmado', 69, 1),
+(36, '2026-05-18', 50000, 'confirmado', 70, 2),
+(37, '2026-03-19', 18125, 'confirmado', 71, 1),
+(38, '2026-08-13', 172500, 'confirmado', 81, 3),
+(39, '2026-08-20', 88750, 'confirmado', 82, 4),
+(40, '2026-08-20', 26625, 'confirmado', 84, 5),
+(41, '2026-08-20', 37719, 'confirmado', 87, 1),
+(42, '2026-09-19', 37719, 'confirmado', 88, 2),
+(43, '2026-10-19', 37719, 'confirmado', 89, 3),
+(44, '2026-07-16', 171600, 'confirmado', 97, 3),
+(45, '2026-07-23', 46250, 'confirmado', 98, 4),
+(46, '2026-07-23', 60000, 'confirmado', 100, 5),
+(47, '2026-09-21', 60000, 'confirmado', 102, 2),
+(48, '2026-07-23', 34125, 'confirmado', 103, 1),
+(49, '2026-08-22', 34125, 'confirmado', 104, 2),
+(50, '2026-09-21', 34125, 'confirmado', 105, 3),
+(51, '2026-10-21', 34125, 'confirmado', 106, 4),
+(52, '2026-09-10', 106250, 'confirmado', 113, 3),
+(53, '2026-09-17', 95625, 'confirmado', 114, 4),
+(54, '2026-10-17', 95625, 'confirmado', 115, 5),
+(55, '2026-09-17', 60209, 'confirmado', 116, 5),
+(56, '2026-10-17', 60208, 'confirmado', 117, 1),
+(57, '2026-09-17', 42500, 'confirmado', 119, 1),
+(58, '2026-08-20', 220000, 'confirmado', 129, 3),
+(59, '2026-08-27', 107500, 'confirmado', 130, 4),
+(60, '2026-08-27', 53667, 'confirmado', 132, 5),
+(61, '2026-09-26', 53667, 'confirmado', 133, 1),
+(62, '2026-10-26', 53666, 'confirmado', 134, 2),
+(63, '2026-09-24', 30312, 'confirmado', 135, 1),
+(64, '2026-09-17', 222750, 'confirmado', 145, 3),
+(65, '2026-10-08', 112625, 'confirmado', 146, 4),
+(66, '2026-11-07', 112625, 'confirmado', 147, 5),
+(67, '2026-10-08', 37667, 'confirmado', 148, 5),
+(68, '2025-12-25', 45688, 'rechazado', 2, 4),
+(69, '2026-01-24', 45687, 'rechazado', 3, 5),
+(70, '2025-12-25', 11825, 'rechazado', 7, 1),
+(71, '2025-12-18', 92500, 'rechazado', 17, 3);
 
-INSERT INTO cuotas (
-    id_cuota, numero_cuota, monto_programado, fecha_vencimiento,
-    id_plan_pago
-)
-SELECT
-    n,
-    1,
-    50000 + (n * 1000),
-    DATE_ADD('2026-03-01', INTERVAL (n - 1) DAY),
-    n
-FROM numeros;
+COMMIT;
 
-INSERT INTO pagos (
-    id_pago, fecha_pago, monto_pagado, estado_pago, id_cuota,
-    id_medio_pago
-)
-SELECT
-    n,
-    DATE_ADD('2026-02-15', INTERVAL (n - 1) DAY),
-    50000 + (n * 1000),
-    ELT(((n - 1) % 3) + 1, 'pendiente', 'confirmado', 'rechazado'),
-    n,
-    MOD(n - 1, 100) + 1
-FROM numeros;
+-- CONTROL DE CANTIDADES
+SELECT 'estudiantes' tabla, COUNT(*) total FROM estudiantes UNION ALL
+SELECT 'especialidades', COUNT(*) FROM especialidades UNION ALL
+SELECT 'profesores', COUNT(*) FROM profesores UNION ALL
+SELECT 'categorias', COUNT(*) FROM categorias UNION ALL
+SELECT 'medios_pago', COUNT(*) FROM medios_pago UNION ALL
+SELECT 'descuentos', COUNT(*) FROM descuentos UNION ALL
+SELECT 'profesores_especialidades', COUNT(*) FROM profesores_especialidades UNION ALL
+SELECT 'cursos', COUNT(*) FROM cursos UNION ALL
+SELECT 'inscripciones', COUNT(*) FROM inscripciones UNION ALL
+SELECT 'planes_pago', COUNT(*) FROM planes_pago UNION ALL
+SELECT 'cuotas', COUNT(*) FROM cuotas UNION ALL
+SELECT 'pagos', COUNT(*) FROM pagos;
 
-DROP TEMPORARY TABLE numeros;
+-- VALIDACIONES: estas consultas deben devolver cero filas
+SELECT * FROM cursos WHERE
+ (estado='finalizado' AND fecha_termino >= '2026-11-08') OR
+ (estado='en_curso' AND NOT ('2026-11-08' BETWEEN fecha_inicio AND fecha_termino)) OR
+ (estado='programado' AND fecha_inicio <= '2026-11-08');
+
+SELECT i.id_inscripcion FROM inscripciones i JOIN cursos c ON c.id_curso=i.id_curso
+WHERE (c.estado='finalizado' AND (i.estado<>'finalizada' OR i.estado_academico NOT IN ('aprobado','reprobado')))
+ OR (c.estado='en_curso' AND (i.estado<>'activa' OR i.estado_academico<>'en_curso'))
+ OR (c.estado='programado' AND (i.estado<>'activa' OR i.estado_academico<>'no_iniciado'))
+ OR (c.estado='cancelado' AND (i.estado<>'cancelada' OR i.estado_academico<>'retirado'));
+
+SELECT p.id_plan_pago FROM planes_pago p LEFT JOIN cuotas c ON c.id_plan_pago=p.id_plan_pago
+GROUP BY p.id_plan_pago,p.numero_cuotas,p.monto_total
+HAVING COUNT(c.id_cuota)<>p.numero_cuotas OR SUM(c.monto_programado)<>p.monto_total;
+
+SELECT c.id_cuota FROM cuotas c LEFT JOIN pagos p ON p.id_cuota=c.id_cuota AND p.estado_pago='confirmado'
+GROUP BY c.id_cuota,c.monto_programado HAVING COALESCE(SUM(p.monto_pagado),0)>c.monto_programado;
+
+-- EJEMPLOS PEDIDOS
+SELECT id_estudiante, COUNT(*) AS inscripciones FROM inscripciones GROUP BY id_estudiante HAVING COUNT(*)>1;
+SELECT c.id_curso,c.nombre FROM cursos c LEFT JOIN inscripciones i ON i.id_curso=c.id_curso WHERE i.id_inscripcion IS NULL;
+SELECT pp.id_plan_pago,pp.monto_total,COALESCE(SUM(CASE WHEN p.estado_pago='confirmado' THEN p.monto_pagado ELSE 0 END),0) AS abonado,
+ pp.monto_total-COALESCE(SUM(CASE WHEN p.estado_pago='confirmado' THEN p.monto_pagado ELSE 0 END),0) AS saldo
+FROM planes_pago pp LEFT JOIN cuotas c ON c.id_plan_pago=pp.id_plan_pago LEFT JOIN pagos p ON p.id_cuota=c.id_cuota
+GROUP BY pp.id_plan_pago,pp.monto_total HAVING saldo>0;
